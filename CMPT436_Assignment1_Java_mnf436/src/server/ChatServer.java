@@ -21,10 +21,12 @@ public class ChatServer {
 			clientSocket = serverSocket.accept();
 			out = new PrintWriter(clientSocket.getOutputStream(),true);
 			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			out.println("Confirming connection");
 		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Something wrong happened with the server");
 		}
 	}
 	
@@ -34,10 +36,11 @@ public class ChatServer {
 			clientSocket = serverSocket.accept();
 			out = new PrintWriter(clientSocket.getOutputStream(),true);
 			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-		
+			out.println("Confirming connection");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Something wrong happened with the server");
 		}
 	}
 	
