@@ -14,34 +14,12 @@ public class ChatServer {
 	PrintWriter out;
 	BufferedReader in;
 	
-	
-	public ChatServer() {
-		try {
-			serverSocket = new ServerSocket(8002);
-			clientSocket = serverSocket.accept();
-			out = new PrintWriter(clientSocket.getOutputStream(),true);
-			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			out.println("Confirming connection");
+	public static void main(String[] args) {
 		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Something wrong happened with the server");
-		}
 	}
 	
-	public ChatServer(int portNumber) {
-		try {
-			serverSocket = new ServerSocket(portNumber);
-			clientSocket = serverSocket.accept();
-			out = new PrintWriter(clientSocket.getOutputStream(),true);
-			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			out.println("Confirming connection");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Something wrong happened with the server");
-		}
+	public ChatServer() {
+		
 	}
 	
 	
