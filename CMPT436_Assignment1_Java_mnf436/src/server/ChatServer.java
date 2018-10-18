@@ -14,11 +14,10 @@ public class ChatServer {
 	static int serverPort;
 	static String serverIP;
 	ServerSocket serverSocket;
-	Socket clientSocket;
-	PrintWriter out;
-	BufferedReader in;
+	static PrintWriter out;
+	static BufferedReader in;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		// Basic deal with args, limited, 1 means setting server port, 2 means setting port and ip, anything else uses defaults
 		if (args.length == 1) {
@@ -33,9 +32,24 @@ public class ChatServer {
 			serverIP = defaultIP;
 		}
 		
+		System.out.println("Chat Server starting up, using Port: " + serverPort);
+		ServerSocket serverListener = new ServerSocket(serverPort);
+		Socket clientSocket = new Socket();
 		
+		System.out.println("Server now waiting for a connection.");
+		clientSocket = serverListener.accept();
 		
+		out = new PrintWriter(clientSocket.getOutputStream(), true);
+		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 		
+		//while (some var != some qutting text) keep waiting for input, then repeat the input with some mod
+		String textTest = in.readLine();
+		System.out.println("Server has recived initial message " + textTest + " from client upon connection");
+		
+		in.close();
+		out.close();
+		clientSocket.close();
+		serverListener.close();
 	}
 	
 	public ChatServer() {
