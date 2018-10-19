@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class ChatServer {
 	
-	private static final int defaultPort = 40008;
+	private static final int defaultPort = 40010;
 	private static final String defaultIP = "localhost";
 	static int serverPort;
 	static String serverIP;
@@ -61,11 +61,8 @@ public class ChatServer {
 		System.out.println(chatServer.currentMessage + " Recived, shutting down");
 		
 		
-		System.out.println("Server shutting down.");
-		chatServer.in.close();
-		chatServer.out.close();
-		chatServer.clientSocket.close();
-		chatServer.serverListener.close();
+		chatServer.shutdown();
+
 		System.out.println("Server shutdown completed.");
 	}
 	
@@ -80,6 +77,20 @@ public class ChatServer {
 		
 		this.out = new PrintWriter(clientSocket.getOutputStream(), true);
 		this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+	}
+	
+	public void shutdown() throws Exception {
+		
+		try {
+			System.out.println("Server shutting down.");
+		}
+		finally {
+			in.close();
+			out.close();
+			clientSocket.close();
+			serverListener.close();
+		}
+		System.out.println("Server shutdown completed.");
 	}
 	
 	
