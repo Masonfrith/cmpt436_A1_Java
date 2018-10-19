@@ -46,7 +46,10 @@ public class ChatServer {
 			chatServer.currentMessage = chatServer.in.readLine();
 			System.out.println("Client says: " + chatServer.currentMessage);
 			
-			if(chatServer.currentMessage.length()<=4) {
+			if(chatServer.currentMessage.equals("QUIT")) {
+				chatServer.out.println("QUIT");
+			}
+			else if(chatServer.currentMessage.length()<=4) {
 				chatServer.out.println("TALK MORE! Here is a number! " + Math.random()*100);
 			}
 			else {
