@@ -42,7 +42,8 @@ public class ChatServer {
 		// will do a test, server should keep running until a client sends the text 'QUIT',
 		// when server recives a message, it will display to its console, and send a random number along with the first few
 		// letters of the message it was sent back to the client.
-		while(chatServer.currentMessage != "QUIT"){
+		System.out.println("Server connected to a client, waiting for message.");
+		while(!chatServer.currentMessage.equals("QUIT")){
 			chatServer.currentMessage = chatServer.in.readLine();
 			System.out.println("Client says: " + chatServer.currentMessage);
 			
@@ -50,10 +51,10 @@ public class ChatServer {
 				chatServer.out.println("QUIT");
 			}
 			else if(chatServer.currentMessage.length()<=4) {
-				chatServer.out.println("TALK MORE! Here is a number! " + Math.random()*100);
+				chatServer.out.println("TALK MORE! Here is a number! " + Math.round(Math.random()*100));
 			}
 			else {
-				chatServer.out.println("" + chatServer.currentMessage.substring(0,5) + "" + Math.random()*1000);
+				chatServer.out.println("" + chatServer.currentMessage.substring(0,5) + "" + Math.round(Math.random()*1000));
 			}
 			
 		}
