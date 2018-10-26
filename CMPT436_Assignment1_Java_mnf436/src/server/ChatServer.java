@@ -87,7 +87,6 @@ public class ChatServer {
 		this.clientSocket = new Socket();
 		// this.currentMessage = "";
 		
-		this.clientSocket = serverListener.accept();
 		
 		// this.out = new PrintWriter(clientSocket.getOutputStream(), true);
 		// this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
