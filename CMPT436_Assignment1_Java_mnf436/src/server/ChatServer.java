@@ -16,9 +16,9 @@ public class ChatServer {
 	
 	ServerSocket serverListener;
 	Socket clientSocket;
-	PrintWriter out;
-	BufferedReader in;
-	String currentMessage;
+	// PrintWriter out;
+	// BufferedReader in;
+	// String currentMessage;
 	
 	public static void main(String[] args) throws Exception {
 		
@@ -42,6 +42,9 @@ public class ChatServer {
 		// will do a test, server should keep running until a client sends the text 'QUIT',
 		// when server recives a message, it will display to its console, and send a random number along with the first few
 		// letters of the message it was sent back to the client.
+		
+		// this loop section should now be obsolete, as it should be run by each handler thread, keeping incase wrong.
+		/**
 		System.out.println("Server connected to a client, waiting for message.");
 		while(!chatServer.currentMessage.equals("QUIT")){
 			chatServer.currentMessage = chatServer.in.readLine();
@@ -59,8 +62,10 @@ public class ChatServer {
 			
 		}
 		System.out.println(chatServer.currentMessage + " Recived, shutting down");
+		**/
 		
 		
+		// shuts down the server, not sure it will be reached anymore, or how to set it off yet.
 		chatServer.shutdown();
 
 		System.out.println("Server shutdown completed.");
@@ -70,13 +75,12 @@ public class ChatServer {
 		
 		this.serverListener = new ServerSocket(portNumber);
 		this.clientSocket = new Socket();
-		this.currentMessage = "";
+		// this.currentMessage = "";
 		
 		this.clientSocket = serverListener.accept();
-		System.out.println("Server now waiting for a connections.");
 		
-		this.out = new PrintWriter(clientSocket.getOutputStream(), true);
-		this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		// this.out = new PrintWriter(clientSocket.getOutputStream(), true);
+		// this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 	}
 	
 	public void shutdown() throws Exception {
@@ -85,8 +89,8 @@ public class ChatServer {
 			System.out.println("Server shutting down.");
 		}
 		finally {
-			in.close();
-			out.close();
+			// in.close();
+			// out.close();
 			clientSocket.close();
 			serverListener.close();
 		}
