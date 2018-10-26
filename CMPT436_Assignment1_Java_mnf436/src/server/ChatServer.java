@@ -37,10 +37,17 @@ public class ChatServer {
 		
 		System.out.println("Chat Server starting up, using Port: " + serverPort);
 		ChatServer chatServer = new ChatServer(serverPort, serverIP);
+		
+		// while loop to listen for connections, then pass off to new threads, and keep listening while the threads deal.
+		while(true) {
+			chatServer.clientSocket = chatServer.serverListener.accept();
+			
+			new Thread(new ClientHandler(chatServer.clientSocket)).run();
+		} // currently no good way to stop.
 
 		// here should be the loop of whatever the server is going to do.
 		// will do a test, server should keep running until a client sends the text 'QUIT',
-		// when server recives a message, it will display to its console, and send a random number along with the first few
+		// when server receives a message, it will display to its console, and send a random number along with the first few
 		// letters of the message it was sent back to the client.
 		
 		// this loop section should now be obsolete, as it should be run by each handler thread, keeping incase wrong.
@@ -66,9 +73,9 @@ public class ChatServer {
 		
 		
 		// shuts down the server, not sure it will be reached anymore, or how to set it off yet.
-		chatServer.shutdown();
+		//chatServer.shutdown();
 
-		System.out.println("Server shutdown completed.");
+		
 	}
 	
 	public ChatServer(int portNumber, String ip) throws IOException {
