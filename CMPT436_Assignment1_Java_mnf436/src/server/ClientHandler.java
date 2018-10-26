@@ -71,6 +71,7 @@ public class ClientHandler implements Runnable {
 		
 		// is the message the command to quit the chat?
 		if(msg.equals("QUIT")) {
+			this.receivedDisconnectCommand = true;
 			return "QUIT";
 		}
 		// when message is 'short' use this
