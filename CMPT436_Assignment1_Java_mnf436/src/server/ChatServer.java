@@ -40,9 +40,12 @@ public class ChatServer {
 		
 		// while loop to listen for connections, then pass off to new threads, and keep listening while the threads deal.
 		while(true) {
+			System.out.println("Server checking for new connections.");
 			chatServer.clientSocket = chatServer.serverListener.accept();
+			System.out.println("New incomming connection, starting new handler.");
 			
-			new Thread(new ClientHandler(chatServer.clientSocket)).run();
+			new Thread(new ClientHandler(chatServer.clientSocket)).start();
+			System.out.println("New handler should now be started for the connection.");
 		} // currently no good way to stop.
 
 		// here should be the loop of whatever the server is going to do.
